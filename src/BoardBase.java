@@ -47,9 +47,11 @@ public class BoardBase {
      * call the reset method
      * */
     public BoardBase() {
-        
-        
-        
+        board=new char[ROWS][COLUMNS];
+        moveNumbers=new int[ROWS][COLUMNS];
+        firstAvailableRow=new int[COLUMNS];
+        winningCells=new Cell[4];
+        reset();
     }
     
     /** Used to reset the the board and other variables between games
@@ -60,13 +62,28 @@ public class BoardBase {
      * set moveNumber to 1
      * */
     public void reset() {
-
-        
-        
-        
-        
-        
-        
+      for(int i=0; i<board.length; i++)
+        {
+          for(int j=0; j<board[0].length;j++)
+          {
+            board[i][j]=UNMARKED;
+          }
+        }
+        for(int i=0; i<moveNumbers.length; i++)
+        {
+          for(int j=0; j<moveNumbers[0].length; j++)
+          {
+            moveNumbers[i][j]=0;
+          }
+        }
+        for(int i=0; i<board[0].length; i++)
+        {
+          firstAvailableRow[i]=ROWS-1;
+        }
+        for(int i=0; i<5; i++)
+        {
+          winningCells[0]=new Cell(0,0);
+        }
     }
     
     /** Returns a copy of the board
@@ -75,9 +92,15 @@ public class BoardBase {
      *  return the new copy
      * */
     public char[][] getGrid() {
-
-        
-        
+      char[][] newBoard=new char[ROWS][COLUMNS];
+        for(int i=0; i<board.length; i++)
+        {
+          for(int j=0; j<board[0].length; j++)
+          {
+            newBoard[i][j]=board[i][j];
+          }
+        }
+        return newBoard;
     }
     
     public boolean isColumnAvailable(int column) {
